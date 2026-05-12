@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дельта | Архитектурное бюро</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared/styles/shared.css">
+    <link rel="stylesheet" href="shared/styles/navigation.css">
+    <style>
+        body {
+        background: 
+            linear-gradient(rgba(43, 43, 43, 0.9), rgba(43, 43, 43, 0.7)),
+            url('../shared/assets/images/BackGroundImgMain.JPG');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        }
+
+        /* Главная страница */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+        }
+    
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: 3px;
+        }
+    
+        .hero-title span {
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+        
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+    
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+    
+        @media (max-width: 768px) {
+        #home {
+            height: calc(100vh - 70px);
+            padding-top: 70px;
+        }
+        }
+    
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Прозрачный футер */
+        footer {
+            background-color: rgba(51, 51, 51, 0.747); 
+            backdrop-filter: blur(2px);
+            border-top: 1px solid rgba(255, 255, 255, 0.048);
+        }
+
+        /* Убрать верхнюю границу у футера на главной */
+        #home + footer {
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Навигация -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><span>Дельта</span></a>
+                
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">Главная</a>
+                    <a href="projects/projects.html" class="nav-link">Проекты</a>
+                    <a href="team/team.html" class="nav-link">Команда</a>
+                    <a href="contacts/contacts.html" class="nav-link">Контакты</a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главная страница - с приветственным экраном -->
+    <main id="home">
+        
+        <div class="hero-content">
+            <h1 class="hero-title"><span>Проектные решения</span>, которые помогают</h1>
+            <p class="hero-subtitle">Мы разрабатываем универсальную архитектуру, 
+                учитывая нормативы и интересы всех сторон, а также придерживаясь принципов междисциплинарного подхода</p>
+            <a href="projects/projects.html" class="btn">Наши проекты</a>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="hero-title"><span>Д</span>ельта</div>
+                    <p class="footer-description">Создаем архитектуру будущего, сочетающую инновации, функциональность и вневременную эстетику.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="projects/projects.html" class="nav-link">Проекты</a>
+                    <a href="team/team.html" class="nav-link">Команда</a>
+                    <a href="contacts/contacts.html" class="nav-link">Контакты</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Архитектурное бюро "Дельта". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="shared/js/shared.js"></script>
+    <script src="shared/js/navigation.js"></script>
+</body>
+</html>

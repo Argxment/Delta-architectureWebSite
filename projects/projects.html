@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты | Дельта | Архитектурное бюро</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../shared/styles/shared.css">
+    <link rel="stylesheet" href="../shared/styles/navigation.css">
+    <link rel="stylesheet" href="projects.css">
+    <style>
+        /* Стили для модального окна */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 2px;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .modal-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .modal-details {
+            margin-top: 2rem;
+        }
+
+        .modal-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .modal-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-details li {
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-details li:last-child {
+            border-bottom: none;
+        }
+
+        .modal-actions {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Адаптивность для модальных окон */
+    @media (max-width: 768px) {
+        .modal-content {
+            max-height: 95vh;
+            margin: 10px;
+        }
+        
+        .modal-header {
+            padding: 1.5rem 1.5rem 1rem;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            padding-right: 40px; /* Чтобы текст не заезжал под кнопку закрытия */
+        }
+        
+        .modal-actions {
+            padding: 1.5rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .modal-actions .btn {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .modal-close {
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            font-size: 1.3rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .modal-content {
+            max-height: 98vh;
+            margin: 5px;
+        }
+        
+        .modal-title {
+            font-size: 1.3rem;
+        }
+        
+        .modal-details h3 {
+            font-size: 1.1rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo"><span>Дельта</span></a>
+                
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="projects.html" class="nav-link active">Проекты</a>
+                    <a href="../team/team.html" class="nav-link">Команда</a>
+                    <a href="../contacts/contacts.html" class="nav-link">Контакты</a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Страница проектов -->
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2 class="section-title">Наши проекты</h2>
+                <p class="page-description">Исследуйте портфолио проектных услуг бюро «Дельта» — от масштабного территориального планирования до архитектурных решений индивидуальных домов</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Проект 1 -->
+                <div class="project-card animate-on-scroll" data-category="individual">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectIndividualHouse.jpg" alt="Индивидуальные жилые дома">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Жилые</div>
+                        <h3 class="project-title">Индивидуальные жилые дома</h3>
+                        <p class="project-description">Архитектурные и рабочие решения для строительства вашего дома мечты</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal1">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Проект 2 -->
+                <div class="project-card animate-on-scroll" data-category="conceptual">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectsConceptArchitecture.jpg" alt="Концептуальная архитектура">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Концептуальные</div>
+                        <h3 class="project-title">Концептуальная архитектура</h3>
+                        <p class="project-description">Креативные кластеры, общественные пространства, художественные решения для имиджа места</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal2">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Проект 3 -->
+                <div class="project-card animate-on-scroll" data-category="improvement">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectBlagoustroistvo.jpg" alt="Благоустройство">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Благоустройство</div>
+                        <h3 class="project-title">Благоустройство</h3>
+                        <p class="project-description">Проекты благоустройства муниципальных и частных территорий для согласования</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal3">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Проект 4 -->
+                <div class="project-card animate-on-scroll" data-category="commercial">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectCommercAndPromishBuildings.JPG" alt="Коммерческие здания">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Коммерческие</div>
+                        <h3 class="project-title">Коммерческие и промышленные здания</h3>
+                        <p class="project-description">Проектная документация стадии «П» для получения разрешения на строительство</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal4">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Проект 5 -->
+                <div class="project-card animate-on-scroll" data-category="planning">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectPlanningNature.jpg" alt="Проекты планировки">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Планировка</div>
+                        <h3 class="project-title">Проекты планировки и межевания</h3>
+                        <p class="project-description">Территориальные проекты для жилых и промышленных зон, прохождение публичных слушаний</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal5">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Проект 6 -->
+                <div class="project-card animate-on-scroll" data-category="urban">
+                    <div class="project-img">
+                        <img src="/shared/assets/images/ProjectGradostroitestvo.jpg" alt="Градостроительные документы">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">Градостроительство</div>
+                        <h3 class="project-title">Градостроительные документы</h3>
+                        <p class="project-description">Градостроительные обоснования для внесения изменений в Генеральный план, Правила землепользования и застройки</p>
+                        <a href="#" class="project-link modal-trigger" data-modal="modal6">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальные окна для каждого проекта -->
+
+    <div id="modal1" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Индивидуальные жилые дома</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Архитектурные и рабочие решения для строительства вашего дома мечты. Мы разрабатываем проекты частных домов, учитывая все пожелания заказчика, особенности участка и современные строительные технологии.</p>
+                <div class="modal-details">
+                    <h3>Что включает услуга:</h3>
+                    <ul>
+                        <li>Разработка архитектурного проекта</li>
+                        <li>Создание рабочих чертежей</li>
+                        <li>Подбор материалов и технологий</li>
+                        <li>Согласование проекта</li>
+                        <li>Авторский надзор</li>
+                        <li>3D-визуализация проекта</li>
+                        <li>Эскизные предложения</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Концептуальная архитектура</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Креативные кластеры, общественные пространства, художественные решения для имиджа места. Создание уникальных архитектурных концепций для общественных зданий, культурных центров и коммерческих объектов.</p>
+                <div class="modal-details">
+                    <h3>Направления работы:</h3>
+                    <ul>
+                        <li>Дизайн-коды городов и территорий</li>
+                        <li>Концепции общественных пространств</li>
+                        <li>Арт-объекты и инсталляции</li>
+                        <li>Брендинг территорий через архитектуру</li>
+                        <li>Конкурсные проекты</li>
+                        <li>Исследовательские работы</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Благоустройство</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Проекты благоустройства муниципальных и частных территорий для согласования. Создание комфортной среды с учетом функциональности, эстетики и экологичности.</p>
+                <div class="modal-details">
+                    <h3>Объекты благоустройства:</h3>
+                    <ul>
+                        <li>Дворовые территории</li>
+                        <li>Парки и скверы</li>
+                        <li>Набережные и прибрежные зоны</li>
+                        <li>Общественные пространства</li>
+                        <li>Частные участки и сады</li>
+                        <li>Территории предприятий</li>
+                        <li>Пешеходные зоны и площади</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Коммерческие и промышленные здания</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Проектная документация стадии «П» для получения разрешения на строительство. Проектирование объектов торговли, офисных центров, производственных помещений и складов.</p>
+                <div class="modal-details">
+                    <h3>Виды объектов:</h3>
+                    <ul>
+                        <li>Торговые центры и магазины</li>
+                        <li>Офисные здания и бизнес-центры</li>
+                        <li>Производственные комплексы</li>
+                        <li>Склады и логистические центры</li>
+                        <li>Гостиницы и отели</li>
+                        <li>Объекты общественного питания</li>
+                        <li>Спортивные сооружения</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal5" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Проекты планировки и межевания</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Территориальные проекты для жилых и промышленных зон, прохождение публичных слушаний. Разработка документации для комплексного развития территорий.</p>
+                <div class="modal-details">
+                    <h3>Состав работ:</h3>
+                    <ul>
+                        <li>Проекты планировки территории (ППТ)</li>
+                        <li>Проекты межевания территории (ПМТ)</li>
+                        <li>Градостроительные планы земельных участков (ГПЗУ)</li>
+                        <li>Проведение публичных слушаний</li>
+                        <li>Согласование в органах власти</li>
+                        <li>Территориальное планирование</li>
+                        <li>Зонирование территорий</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal6" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Градостроительные документы</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Градостроительные обоснования для внесения изменений в Генеральный план, Правила землепользования и застройки. Подготовка документации для изменения градостроительного регламента.</p>
+                <div class="modal-details">
+                    <h3>Виды документов:</h3>
+                    <ul>
+                        <li>Градостроительные обоснования</li>
+                        <li>Обоснования для внесения изменений в ПЗЗ</li>
+                        <li>Документация по изменению ВРИ</li>
+                        <li>Проекты корректировки Генерального плана</li>
+                        <li>Градостроительные заключения</li>
+                        <li>Землеустроительная документация</li>
+                        <li>Согласование с органами архитектуры</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn modal-close-btn">Закрыть</button>
+                <a href="../contacts/contacts.html" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Дельта</div>
+                    <p class="footer-description">Создаем архитектуру будущего, сочетающую инновации, функциональность и вневременную эстетику.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="projects.html" class="nav-link">Проекты</a>
+                    <a href="../team/team.html" class="nav-link">Команда</a>
+                    <a href="../contacts/contacts.html" class="nav-link">Контакты</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Архитектурное бюро «Дельта». Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../shared/js/shared.js"></script>
+    <script src="../shared/js/navigation.js"></script>
+    <script src="projects.js"></script>
+    <script>
+        // Скрипт для модальных окон
+        document.addEventListener('DOMContentLoaded', function() {
+            // Открытие модального окна
+            const modalTriggers = document.querySelectorAll('.modal-trigger');
+            const modals = document.querySelectorAll('.modal-overlay');
+            const closeButtons = document.querySelectorAll('.modal-close, .modal-close-btn');
+            
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    
+                    if (modal) {
+                        modal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+                    }
+                });
+            });
+            
+            // Закрытие модального окна
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    modals.forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+                    document.body.style.overflow = ''; // Восстанавливаем скролл
+                });
+            });
+            
+            // Закрытие при клике вне модального окна
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // Закрытие по клавише ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modals.forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

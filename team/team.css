@@ -1,0 +1,85 @@
+/* Специфичные стили для страницы команды */
+main {
+    padding-top: 120px;
+    min-height: calc(100vh - 80px);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.team-member {
+    background-color: var(--card-bg);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.member-photo {
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+}
+
+.member-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 70%, rgba(13, 13, 13, 0.9) 100%);
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.team-member:hover .member-photo img {
+    transform: scale(1.05);
+}
+
+.member-info {
+    padding: 1.8rem;
+    text-align: center;
+}
+
+.member-name {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.member-position {
+    color: var(--accent-color);
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+}
+
+.member-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+@media (max-width: 576px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
